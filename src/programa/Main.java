@@ -3,74 +3,77 @@ package programa;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import controle.PessoaDAO;
-import modelo.Pessoa;
-
 public class Main {
+    public static void main(String[] args){
+        Integer opcaoSelecionada=Integer.MAX_VALUE;
+        Scanner leitura=new Scanner(System.in);
+        ArrayList<Tarefa> tarefas = new ArrayList<>();
+        TarefaDAO tarefaDAO=new TarefaDAO();
 
-	public static void main(String[] args) {
+        while (opcaoSelecionada!=0){
 
-		Integer opcaoSelecionada = Integer.MAX_VALUE;
-		Scanner leitura = new Scanner(System.in);
-		ArrayList<Pessoa> pessoas = new ArrayList<>();
+            System.out.println("- SISTEMA DE GERENCIAMENTO DE TAREFAS -");
+            System.out.println("0 SAIR");
+            System.out.println("1 CRIAR TAREFA");
+            System.out.println("2 REMOVER TAREFA");
+            System.out.println("3 LISTAR TAREFAS");
+            System.out.println("4 ATUALIZAR TAREFA");
 
-		while (opcaoSelecionada != 0) {
+            opcaoSelecionada = Integer.valueOf(leitura.nextLine());
 
-			/**
-			 * Esta é so uma proposta de menu de sistema.
-			 * 
-			 * Voce nao precisa seguir esta ordem, desde que seu sistema respeite a logica
-			 * de incluir, alterar, listar e excluir de alguma forma.
-			 */
-			System.out.println("- MENU EXEMPLO -");
-			System.out.println("0 SAIR");
-			System.out.println("1 CADASTRAR");
-			System.out.println("2 ALTERAR");
-			System.out.println("3 EXCLUIR");
-			System.out.println("4 LISTAR");
+            switch (opcaoSelecionada){
+                case 0:{
+                    System.out.println("Saindo do sistema. Adeus!");
+                    break;}
+                case 1:{
+                    System.out.println("Criando uma nova tarefa:");
+                    System.out.println("Título:");
+                    String titulo=leitura.nextLine();
+                    System.out.println("Descrição:");
+                    String descricao=leitura.nextLine();
+                    System.out.println("Data de Vencimento:");
+                    String dataVencimento=leitura.nextLine();
+                    Tarefa tarefa=new Tarefa(titulo,descricao,dataVencimento);
+                    tarefaDAO.criarTarefa(tarefa);
 
-			opcaoSelecionada = Integer.valueOf(leitura.nextLine());
+                    System.out.println("Tarefa criada com sucesso!");
+                    break;}
+                case 2:{
+                    System.out.println("Digite o título da tarefa que deseja remover:");
+                    String titulo = leitura.nextLine();
+                    tarefaDAO.removerTarefa(titulo);
+                    System.out.println("Tarefa removida com sucesso!");
+                    break;}
+                case 3:{
+                    System.out.println("Listagem de tarefas cadastradas: \n");
+                    ArrayList<Tarefa> todasTarefas=tarefaDAO.listarTarefas();
+                    for (Tarefa tarefa:todasTarefas) {
+                        System.out.println("Título: "+tarefa.getTitulo());
+                        System.out.println("Descrição: "+tarefa.getDescricao());
+                        System.out.println("Data de Vencimento: "+tarefa.getDataVencimento());
+                        System.out.println("\n------------------------\n");}
+                    break;}
+                case 4:{
+                    System.out.println("Digite o título da tarefa que deseja atualizar:");
+                    String titulo=leitura.nextLine();
+                    Tarefa tarefaExistente=tarefaDAO.buscarTarefaPorTitulo(titulo);
 
-			switch (opcaoSelecionada) {
-			case 0: {
-				// Fecha sistema
-				break;
-			}
-			case 1: {
-				// Leitura de dados (input)
-				System.out.println("Nome:");
-				String nome = leitura.nextLine();
-				System.out.println("Cpf:");
-				String cpf = leitura.nextLine();
+                    if (tarefaExistente!=null){
+                        System.out.println("Nova descrição (ou deixe em branco para manter a mesma):");
+                        String novaDescricao=leitura.nextLine();
+                        System.out.println("Nova data de vencimento (ou deixe em branco para manter a mesma):");
+                        String novaDataVencimento=leitura.nextLine();
 
-				Pessoa p = new Pessoa();
-				p.setNome(nome);
-				p.setCpf(Long.valueOf(cpf));
-
-				pessoas.add(p);
-
-			}
-			case 2: {
-				System.out.println("Digite o cpf da pessoa que deseja alterar:");
-				// finalizar codigo
-			}
-			case 3: {
-				System.out.println("Digite o cpf da pessoa que deseja excluir:");
-				// finalizar codigo
-			}
-			case 4: {
-				// Saida de dados (output)
-				System.out.println("Listagem de pessoas cadastradas: ");
-				for (Pessoa pessoa : pessoas) {
-					System.out.println("Cpf: " + pessoa.getCpf());
-					System.out.println("Nome: " + pessoa.getNome());
-				}
-			}
-
-			}
-
-		}
-
-		leitura.close();
-	}
+                        tarefaDAO.atualizarTarefa(tarefaExistente,novaDescricao,novaDataVencimento);
+                        System.out.println("Tarefa atualizada com sucesso!");
+                    }else{
+                        System.out.println("Tarefa não encontrada.");}
+                    break;}
+                default:{
+                    System.out.println("Opção inválida. Por favor, selecione uma opção válida.");
+                    break;
+        }
+        }
+        }
+        leitura.close();}
 }

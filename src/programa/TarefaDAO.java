@@ -2,7 +2,8 @@ package programa;
 	
 	import java.util.ArrayList;
 
-	public class TarefaDAO {
+	public class TarefaDAO
+	{
 	    private ArrayList<Tarefa> tarefas = new ArrayList<>();
 
 	    public void criarTarefa(Tarefa tarefa) {
