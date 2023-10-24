@@ -12,7 +12,7 @@ public class Main {
 
         while (opcaoSelecionada!=0){
 
-            System.out.println("------- SISTEMA DE GERENCIAMENTO DE TAREFAS -------");
+            System.out.println("========== SISTEMA DE GERENCIAMENTO DE TAREFAS ==========");
             System.out.println("0 SAIR");
             System.out.println("1 CRIAR TAREFA");
             System.out.println("2 REMOVER TAREFA");
