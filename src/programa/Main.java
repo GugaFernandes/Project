@@ -12,7 +12,7 @@ public class Main {
 
         while (opcaoSelecionada!=0){
 
-            System.out.println("- SISTEMA DE GERENCIAMENTO DE TAREFAS -");
+            System.out.println("------- SISTEMA DE GERENCIAMENTO DE TAREFAS -------");
             System.out.println("0 SAIR");
             System.out.println("1 CRIAR TAREFA");
             System.out.println("2 REMOVER TAREFA");
@@ -31,7 +31,7 @@ public class Main {
                     String titulo=leitura.nextLine();
                     System.out.println("Descrição:");
                     String descricao=leitura.nextLine();
-                    System.out.println("Data de Vencimento:");
+                    System.out.println("Data de validade:");
                     String dataVencimento=leitura.nextLine();
                     Tarefa tarefa=new Tarefa(titulo,descricao,dataVencimento);
                     tarefaDAO.criarTarefa(tarefa);
