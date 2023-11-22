@@ -51,7 +51,7 @@ public class Main {
                         System.out.println("Título: "+tarefa.getTitulo());// Chamada ao método getTitulo da classe Tarefa.
                         System.out.println("Descrição: "+tarefa.getDescricao());
                         System.out.println("Data de Vencimento: "+tarefa.getDataVencimento());
-                        System.out.println("\n------------------------\n");}
+                        System.out.println("\n--------------------------\n");}
                     break;}
                 case 4:{
                     System.out.println("Digite o título da tarefa que deseja atualizar:");
