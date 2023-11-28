@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args){
         Integer opcaoSelecionada=Integer.MAX_VALUE;
         Scanner leitura=new Scanner(System.in);
-        ArrayList<Tarefa> tarefas = new ArrayList<>();
-        TarefaDAO tarefaDAO=new TarefaDAO();// Cria um objeto TarefaDAO para manipular tarefas.
+        TarefaController tarefaController = new TarefaController();
+
 
         while (opcaoSelecionada!=0){
 
@@ -33,21 +33,20 @@ public class Main {
                     String descricao=leitura.nextLine();
                     System.out.println("Data de validade:");
                     String dataVencimento=leitura.nextLine();
-                    Tarefa tarefa=new Tarefa(titulo,descricao,dataVencimento);
-                    tarefaDAO.criarTarefa(tarefa);
+                    tarefaController.criarTarefa (titulo,descricao,dataVencimento);
+   
 
                     System.out.println("Tarefa criada com sucesso!");
                     break;}
                 case 2:{
                     System.out.println("Digite o título da tarefa que deseja remover:");
                     String titulo = leitura.nextLine();
-                    tarefaDAO.removerTarefa(titulo);// Chama o método removerTarefa do objeto tarefaDAO.
+                    tarefaController.criarTarefa(titulo);// Chama o método removerTarefa do objeto tarefaDAO.
                     System.out.println("Tarefa removida com sucesso!");
                     break;}
                 case 3:{
                     System.out.println("Listagem de tarefas cadastradas: \n");
-                    ArrayList<Tarefa> todasTarefas=tarefaDAO.listarTarefas();// Chama o método listarTarefas do objeto tarefaDAO.
-                    for (Tarefa tarefa:todasTarefas) {
+                    tarefaController.criarTarefa
                         System.out.println("Título: "+tarefa.getTitulo());// Chamada ao método getTitulo da classe Tarefa.
                         System.out.println("Descrição: "+tarefa.getDescricao());
                         System.out.println("Data de Vencimento: "+tarefa.getDataVencimento());
