@@ -4,25 +4,28 @@ package programa;
 
 	public class TarefaDAO
 	{
-	    private ArrayList<Tarefa> tarefas = new ArrayList<>();
+		private TarefaBanco database;
+		public TarefaDAO() {
+	        this.database = TarefaBanco.getInstance();
+	    }
 
 	    public void criarTarefa(Tarefa tarefa) {
-	        tarefas.add(tarefa);
+	    	database.getTarefas().add(tarefa);
 	    }
 
 	    public void removerTarefa(String titulo) {
 	        Tarefa tarefaParaRemover = buscarTarefaPorTitulo(titulo);
 	        if (tarefaParaRemover != null) {
-	            tarefas.remove(tarefaParaRemover);
+	        	database.getTarefas().remove(tarefaParaRemover);
 	        }
 	    }
 
 	    public ArrayList<Tarefa> listarTarefas() {
-	        return tarefas;
+	    	return database.getTarefas();
 	    }
 
 	    public Tarefa buscarTarefaPorTitulo(String titulo) {
-	        for (Tarefa tarefa : tarefas) {
+	        for (Tarefa tarefa : database.getTarefas()) {
 	            if (tarefa.getTitulo().equalsIgnoreCase(titulo)) {
 	                return tarefa;
 	            }
