@@ -1,6 +1,5 @@
 package programa;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -41,12 +40,12 @@ public class Main {
                 case 2:{
                     System.out.println("Digite o título da tarefa que deseja remover:");
                     String titulo = leitura.nextLine();
-                    tarefaController.criarTarefa(titulo);// Chama o método removerTarefa do objeto tarefaDAO.
+                    tarefaController.removerTarefa(tituloRemover);
                     System.out.println("Tarefa removida com sucesso!");
                     break;}
                 case 3:{
                     System.out.println("Listagem de tarefas cadastradas: \n");
-                    tarefaController.criarTarefa
+                    tarefaController.listarTarefas().forEach(tarefa -> {
                         System.out.println("Título: "+tarefa.getTitulo());// Chamada ao método getTitulo da classe Tarefa.
                         System.out.println("Descrição: "+tarefa.getDescricao());
                         System.out.println("Data de Vencimento: "+tarefa.getDataVencimento());
@@ -55,7 +54,7 @@ public class Main {
                 case 4:{
                     System.out.println("Digite o título da tarefa que deseja atualizar:");
                     String titulo=leitura.nextLine();
-                    Tarefa tarefaExistente=tarefaDAO.buscarTarefaPorTitulo(titulo);// Chama o método buscarTarefaPorTitulo do objeto tarefaDAO.
+                    Tarefa tarefaExistente=tarefaController.buscarTarefaPorTitulo(tituloAtualizar);
 
                     if (tarefaExistente!=null){
                         System.out.println("Nova descrição (ou deixe em branco para manter a mesma):");
@@ -63,7 +62,7 @@ public class Main {
                         System.out.println("Nova data de vencimento (ou deixe em branco para manter a mesma):");
                         String novaDataVencimento=leitura.nextLine();
 
-                        tarefaDAO.atualizarTarefa(tarefaExistente,novaDescricao,novaDataVencimento);// Chama o método atualizarTarefa do objeto tarefaDAO.
+                        tarefaController.atualizarTarefa(tarefaExistente,novaDescricao,novaDataVencimento);
                         System.out.println("Tarefa atualizada com sucesso!");
                     }else{
                         System.out.println("Tarefa não encontrada.");}
