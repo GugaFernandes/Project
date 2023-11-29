@@ -39,22 +39,23 @@ public class Main {
                     break;}
                 case 2:{
                     System.out.println("Digite o título da tarefa que deseja remover:");
-                    String titulo = leitura.nextLine();
+                    String tituloRemover=leitura.nextLine();
                     tarefaController.removerTarefa(tituloRemover);
                     System.out.println("Tarefa removida com sucesso!");
                     break;}
-                case 3:{
+                case 3:
                     System.out.println("Listagem de tarefas cadastradas: \n");
                     tarefaController.listarTarefas().forEach(tarefa -> {
-                        System.out.println("Título: "+tarefa.getTitulo());// Chamada ao método getTitulo da classe Tarefa.
-                        System.out.println("Descrição: "+tarefa.getDescricao());
-                        System.out.println("Data de Vencimento: "+tarefa.getDataVencimento());
-                        System.out.println("\n--------------------------\n");}
-                    break;}
+                        System.out.println("Título: " + tarefa.getTitulo());
+                        System.out.println("Descrição: " + tarefa.getDescricao());
+                        System.out.println("Data de Vencimento: " + tarefa.getDataVencimento());
+                        System.out.println("\n--------------------------\n");
+                    });
+                    break;
                 case 4:{
                     System.out.println("Digite o título da tarefa que deseja atualizar:");
-                    String titulo=leitura.nextLine();
-                    Tarefa tarefaExistente=tarefaController.buscarTarefaPorTitulo(tituloAtualizar);
+                    String tituloAtualizar=leitura.nextLine();
+					Tarefa tarefaExistente=tarefaController.buscarTarefaPorTitulo(tituloAtualizar);
 
                     if (tarefaExistente!=null){
                         System.out.println("Nova descrição (ou deixe em branco para manter a mesma):");
