@@ -2,46 +2,57 @@ package controle;
 
 import java.util.ArrayList;
 
+import modelo.ITarefaDAO;
 import modelo.Tarefa;
-import modelo.TarefaBanco;
 
-public class TarefaDAO
-{
-	private TarefaBanco database;
-	public TarefaDAO() {
-        this.database = TarefaBanco.getInstance();
-    }
+public class TarefaDAO implements ITarefaDAO {
 
-    public void criarTarefa(Tarefa tarefa) {
-    	database.getTarefas().add(tarefa);
-    }
+	private static TarefaDAO instancia;
+	private static ArrayList<Tarefa> database;
 
-    public void removerTarefa(String titulo) {
-        Tarefa tarefaParaRemover = buscarTarefaPorTitulo(titulo);
-        if (tarefaParaRemover != null) {
-        	database.getTarefas().remove(tarefaParaRemover);
-        }
-    }
+	private TarefaDAO() {
+	}
 
-    public ArrayList<Tarefa> listarTarefas() {
-    	return database.getTarefas();
-    }
+	public static TarefaDAO getInstancia() {
+		if (instancia == null) {
+			instancia = new TarefaDAO();
+			database = new ArrayList<>();
+		}
 
-    public Tarefa buscarTarefaPorTitulo(String titulo) {
-        for (Tarefa tarefa : database.getTarefas()) {
-            if (tarefa.getTitulo().equalsIgnoreCase(titulo)) {
-                return tarefa;
-            }
-        }
-        return null;
-    }
+		return instancia;
+	}
 
-    public void atualizarTarefa(Tarefa tarefa, String novaDescricao, String novaDataVencimento) {
-        if (novaDescricao != null && !novaDescricao.isEmpty()) {
-            tarefa.setDescricao(novaDescricao);
-        }
-        if (novaDataVencimento != null && !novaDataVencimento.isEmpty()) {
-            tarefa.setDataVencimento(novaDataVencimento);
-        }
-    }
+	public void criarTarefa(Tarefa tarefa) {
+		database.add(tarefa);
+	}
+
+	public void removerTarefa(String titulo) {
+		Tarefa tarefaParaRemover = buscarTarefaPorTitulo(titulo);
+		if (tarefaParaRemover != null) {
+			database.remove(tarefaParaRemover);
+		}
+	}
+
+	public ArrayList<Tarefa> listarTarefas() {
+		return database;
+	}
+
+	public Tarefa buscarTarefaPorTitulo(String titulo) {
+		for (Tarefa tarefa : database) {
+			if (tarefa.getTitulo().equalsIgnoreCase(titulo)) {
+				return tarefa;
+			}
+		}
+		
+		return null;
+	}
+
+	public void atualizarTarefa(Tarefa tarefa, String novaDescricao, String novaDataVencimento) {
+		if (novaDescricao != null && !novaDescricao.isEmpty()) {
+			tarefa.setDescricao(novaDescricao);
+		}
+		if (novaDataVencimento != null && !novaDataVencimento.isEmpty()) {
+			tarefa.setDataVencimento(novaDataVencimento);
+		}
+	}
 }

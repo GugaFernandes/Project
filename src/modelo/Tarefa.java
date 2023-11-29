@@ -1,41 +1,42 @@
 package modelo;
 
 public class Tarefa {
-    private String titulo;
-    private String descricao;
-    private String dataVencimento;
+	private String titulo;
+	private String descricao;
+	private String dataVencimento;
 
-    public Tarefa(String titulo, String descricao, String dataVencimento) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
-    }
+	public Tarefa() {
+	}
 
-    // Getters e setters
+	public Tarefa(String titulo, String descricao, String dataVencimento) {
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.dataVencimento = dataVencimento;
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	// Getters e setters
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public String getDataVencimento() {
-        return dataVencimento;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setDataVencimento(String dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
+	public String getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(String dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
 }
-
-
